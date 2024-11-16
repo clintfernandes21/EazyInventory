@@ -25,6 +25,8 @@ SECRET_KEY = 'django-insecure-ret+=p52^#y=+h@3_b2&otj0bslgz=jmc+#!e54ky&q6%ukifw
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+AUTH_USER_MODEL = 'accounts.Employees'
+
 CSRF_TRUSTED_ORIGINS=['https://fcd4557aec50472ab6225d1c6efe2f21.vfs.cloud9.us-east-1.amazonaws.com']
 
 ALLOWED_HOSTS = ['*']
@@ -40,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'landing',
+    'accounts',
 ]
 
 MIDDLEWARE = [

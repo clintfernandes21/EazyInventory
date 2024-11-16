@@ -1,0 +1,92 @@
+<!--accounts/templates/accounts/admin_home.html-->
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+    
+</head>
+<body>
+    <div class="row">
+    	<div class="col-md-12">
+    		<h4>Welcome, {{ user.first_name }}</h4>
+    		<hr>
+    		<div class="row text-center" style="margin-left: 0px; margin-right: 0px;">
+	            <div class="col" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-wallet" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Text</span>
+	                                <h3></h3>
+	                            </div>
+	                        </div>
+	                   </div>
+	                </div>
+	            </div>
+	            <div class="col" style="background-color: #ffffff; margin: 0 5px 0 10px; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-right-left" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Text</span>
+	                                <h3></h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-3" style="background-color: #ffffff; margin: 0 10px 0 5px; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-arrow-down" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Text</span>
+	                                <h3></h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-3" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-arrow-up" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Text</span>
+	                                <h3>{{active_user_id}}</h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+    	</div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

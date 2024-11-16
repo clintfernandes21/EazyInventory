@@ -1,0 +1,25 @@
+<!--accounts/templates/accounts/employee_login.html-->
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Login Here</h4>
+        <hr>
+        <div class="card card-body" style="padding: 3rem 30rem 3rem 30rem;">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <button class="btn btn-primary col" type="submit">Login</button>
+            {% if messages %}
+                {% for message in messages %}
+                    <p style="margin: 20px 0 0 0; color: red;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+            <!--<p style="margin: 20px 0 0 0;">Don't have an account? <a href="">Register now</a>.</p>-->
+        </div>
+    </div>
+</div>
+
+{% endblock %}
