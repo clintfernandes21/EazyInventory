@@ -1,0 +1,39 @@
+<!--assets/templates/assets/view_asset.html-->
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="row">
+	<div class="col-md-12">
+	    <h4>All Assets</h4>
+	    <hr>
+	    <div class="card card-body">
+	        <table class="table table-striped">
+	            <thead class="thead-dark">
+	                <tr>
+	                    <th>Name</th>
+	                    <th>Category</th>
+	                    <th>Tag</th>
+	                    <th>Purchase Date</th>
+	                </tr>
+	            </thead>
+	            {% if context.all_assets %}
+    				{% for asset in context.all_assets %}
+    					<tr>
+    					    <td>{{ asset.name }}</td>
+    						<td>{{ asset.category}}</td>
+    						<td>{{ asset.tag }}</td>
+    						<td>{{ asset.purchase_date }}</td>
+    					</tr>
+    				{% endfor %}
+    			{% else %}
+    			    <tr>
+    			        <td colspan="4" class="text-center text-muted">You do not have any transactions to display</td>
+    			    </tr>
+    			{% endif %}
+    	    </table>
+    	</div>
+	</div>
+</div>
+
+{% endblock %}

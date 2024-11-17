@@ -10,4 +10,6 @@ urlpatterns = [
     
     path('admin_home/', admin_home, name='admin_home'),
     path('admin_logout/', admin_logout, name='admin_logout'),
+    
+    path('', include('assets.urls')),
 ]
