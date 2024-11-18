@@ -1,11 +1,11 @@
-<!--assets/templates/assets/view_asset.html-->
+<!--assets/templates/assets/view_component.html-->
 {% extends 'layout.html' %}
 
 {% block content %}
 
 <div class="row">
 	<div class="col-md-12">
-	    <h4>All Assets</h4>
+	    <h4>All Components</h4>
 	    <hr>
 	    <div class="card card-body">
 	        <table class="table table-striped">
@@ -18,14 +18,14 @@
 	                    <th>Purchase Date</th>
 	                </tr>
 	            </thead>
-	            {% if context.all_assets %}
-    				{% for asset in context.all_assets %}
+	            {% if context.all_components %}
+    				{% for components in context.all_components %}
     					<tr>
-    					    <td>{{ asset.name }}</td>
-    						<td>{{ asset.category}}</td>
-    						<td>{{ asset.tag }}</td>
-    						<td>{{ asset.brand }}</td>
-    						<td>{{ asset.purchase_date }}</td>
+    					    <td>{{ components.name }}</td>
+    						<td>{{ components.category}}</td>
+    						<td>{{ components.tag }}</td>
+    						<td>{{ components.brand }}</td>
+    						<td>{{ components.purchase_date }}</td>
     					</tr>
     				{% endfor %}
     			{% else %}
