@@ -1,6 +1,7 @@
 # assets/urls.py
 from django.urls import path, include
 from .views import add_asset, view_asset, checkout_asset, checkin_asset, add_component, view_component
+from .views import employee_view_asset
 
 urlpatterns = [
     path('add_asset/', add_asset, name='add_asset'),
@@ -10,4 +11,6 @@ urlpatterns = [
     
     path('add_component/', add_component, name='add_component'),
     path('view_component/', view_component, name='view_component'),
+    
+    path('employee_view_asset/', employee_view_asset, name='employee_view_asset'),
 ]

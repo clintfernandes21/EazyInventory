@@ -98,3 +98,14 @@ def checkin_asset(request):
         return render(request, 'assets/checkin_asset.html', {'form': form})
     else:
         return redirect('employee_login')
+
+def employee_view_asset(request):
+    active_user_id = request.session.get('user_id')
+    all_assets = Asset.objects.filter(assigned_to=active_user_id)
+    context = {
+        'all_assets': all_assets
+    }
+    if active_user_id:
+        return render(request, 'assets/employee_view_asset.html', {'context': context})
+    else:
+        return redirect('employee_login')
