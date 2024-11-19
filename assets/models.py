@@ -1,5 +1,6 @@
 # assets/models.py
 from django.db import models
+from accounts.models import Employees
 
 class Asset(models.Model):
     name = models.CharField(max_length=30)
@@ -15,6 +16,7 @@ class Asset(models.Model):
     ASSET_BRAND_CHOICES = [
         ('Apple', 'Apple'),
         ('Asus', 'Asus'),
+        ('Dell', 'Dell'),
         ('HP', 'HP'),
         ('Lenovo', 'Lenovo'),
         ('Microsoft', 'Microsoft'),
@@ -22,7 +24,15 @@ class Asset(models.Model):
     ]
     brand = models.CharField(max_length=20, choices=ASSET_BRAND_CHOICES)
     purchase_date = models.DateField()
-    
+    ASSET_STATUS_CHOICES = [
+        ('CheckedIn', 'CheckedIn'),
+        ('CheckedOut', 'CheckedOut'),
+        ('UnderService', 'UnderService'),
+        ('Discarded', 'Discarded')
+    ]
+    status = models.CharField(max_length=20, choices=ASSET_STATUS_CHOICES, null=True, blank=True, default="CheckedIn")
+    assigned_to = models.ForeignKey(Employees, on_delete=models.CASCADE, null=True, blank=True)
+
     def __str__(self):
         return str(self.name)
 

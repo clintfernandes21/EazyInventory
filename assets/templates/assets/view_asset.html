@@ -1,7 +1,20 @@
 <!--assets/templates/assets/view_asset.html-->
 {% extends 'layout.html' %}
 
+{% load static %}
+
 {% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+</head>
 
 <div class="row">
 	<div class="col-md-12">
@@ -16,6 +29,8 @@
 	                    <th>Tag</th>
 	                    <th>Brand</th>
 	                    <th>Purchase Date</th>
+	                    <th>Assigned To</th>
+	                    <th>Status</th>
 	                </tr>
 	            </thead>
 	            {% if context.all_assets %}
@@ -26,11 +41,23 @@
     						<td>{{ asset.tag }}</td>
     						<td>{{ asset.brand }}</td>
     						<td>{{ asset.purchase_date }}</td>
+    						<td><i class="fa-solid fa-user"></i> {{ asset.assigned_to }}</td>
+    						{% if asset.status == "CheckedIn" %}
+    							<td><button class="btn btn-primary btn-sm btn-success" style="width: 7rem;">Checked In</button></td>
+    						{% elif asset.status == "CheckedOut" %}
+    							<td><button class="btn btn-primary btn-sm btn-warning" style="width: 7rem;">Checked Out</button></td>
+    						{% elif asset.status == "UnderService" %}
+    							<td><button class="btn btn-primary btn-sm btn-secondary" style="width: 7rem;">Under Service</button></td>
+    						{% elif asset.status == "Discarded" %}
+    							<td><button class="btn btn-primary btn-sm btn-danger" style="width: 7rem;">Discarded</button></td>
+    						{% else %}
+    							<td><button class="btn btn-primary btn-sm btn-danger" style="width: 7rem;">Discarded</button></td>
+    						{% endif %}
     					</tr>
     				{% endfor %}
     			{% else %}
     			    <tr>
-    			        <td colspan="5" class="text-center text-muted">You do not have any transactions to display</td>
+    			        <td colspan="7" class="text-center text-muted">You do not have any transactions to display</td>
     			    </tr>
     			{% endif %}
     	    </table>

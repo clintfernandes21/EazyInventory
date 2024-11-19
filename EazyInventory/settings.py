@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'landing',
     'accounts',
     'assets',
+    'fontawesomefree',
 ]
 
 MIDDLEWARE = [

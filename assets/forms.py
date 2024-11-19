@@ -1,6 +1,7 @@
 # assets/forms.py
 from django import forms
 from .models import Asset, Component
+from accounts.models import Employees
 
 class AddAssetForm(forms.ModelForm):
     name = forms.CharField(max_length=30, required=True, label="Name", widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -23,3 +24,18 @@ class AddComponentForm(forms.ModelForm):
     class Meta:
         model = Component
         fields = ['name', 'category', 'tag', 'brand', 'purchase_date']
+
+class AssetCheckOutForm(forms.ModelForm):
+    asset = forms.ModelChoiceField(queryset=Asset.objects.exclude(status__in=["CheckedOut", "UnderService", "Discarded"]), label="Select an Asset", widget=forms.Select(attrs={'class': 'form-control'}))
+    employee_username = forms.ModelChoiceField(queryset=Employees.objects.exclude(username__in=["admin", "bang1"]), label="Select an Employee", widget=forms.Select(attrs={'class': 'form-control'}))
+    
+    class Meta:
+        model = Asset
+        fields = ['asset', 'employee_username']
+
+class AssetCheckInForm(forms.ModelForm):
+    asset = forms.ModelChoiceField(queryset=Asset.objects.exclude(status__in=["CheckedIn", "UnderService", "Discarded"]), label="Select an Asset", widget=forms.Select(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = Asset
+        fields = ['asset']

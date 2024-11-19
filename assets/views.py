@@ -1,7 +1,7 @@
 # assets/views.py
 from django.shortcuts import render, redirect
 from .models import Asset, Component
-from .forms import AddAssetForm, AddComponentForm
+from .forms import AddAssetForm, AddComponentForm, AssetCheckOutForm, AssetCheckInForm
 from django.contrib import messages
 
 def add_asset(request):
@@ -53,5 +53,48 @@ def view_component(request):
     }
     if active_user_id:
         return render(request, 'assets/view_component.html', {'context': context})
+    else:
+        return redirect('employee_login')
+
+def checkout_asset(request):
+    active_user_id = request.session.get('user_id')
+    if active_user_id:
+        if request.method == 'POST':
+            form = AssetCheckOutForm(request.POST)
+            if form.is_valid():
+                asset = form.cleaned_data['asset']
+                employee_username = form.cleaned_data['employee_username']
+                asset = Asset.objects.get(name=asset)
+                asset.status = "CheckedOut"
+                asset.save(update_fields=['status'])
+                asset.assigned_to = employee_username
+                asset.save(update_fields=['assigned_to'])
+                
+                messages.success(request, f"Item checked out successfully.")
+                return redirect('checkout_asset')
+        else:
+            form = AssetCheckOutForm()
+        return render(request, 'assets/checkout_asset.html', {'form': form})
+    else:
+        return redirect('employee_login')
+
+def checkin_asset(request):
+    active_user_id = request.session.get('user_id')
+    if active_user_id:
+        if request.method == 'POST':
+            form = AssetCheckInForm(request.POST)
+            if form.is_valid():
+                asset = form.cleaned_data['asset']
+                asset = Asset.objects.get(name=asset)
+                asset.status = "CheckedIn"
+                asset.save(update_fields=['status'])
+                asset.assigned_to = None
+                asset.save(update_fields=['assigned_to'])
+                
+                messages.success(request, f"Item checked in successfully.")
+                return redirect('checkin_asset')
+        else:
+            form = AssetCheckInForm()
+        return render(request, 'assets/checkin_asset.html', {'form': form})
     else:
         return redirect('employee_login')
