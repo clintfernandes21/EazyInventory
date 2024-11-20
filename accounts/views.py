@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from .forms import EmployeeRegisterForm, EmployeeLoginForm
 from accounts.models import Employees
+from assets.models import Asset, AssetRequest
 from django.contrib import messages
 
 def employee_register(request):
@@ -46,8 +47,31 @@ def employee_logout(request):
 
 def admin_home(request):
     active_user_id = request.session.get('user_id')
+    
+    asset_count = Asset.objects.count()
+    asset_checkedin_count = Asset.objects.filter(status="CheckedIn").count()
+    asset_checkedout_count = Asset.objects.filter(status="CheckedOut").count()
+    asset_under_service_count = Asset.objects.filter(status="UnderService").count()
+    asset_discarded_count = Asset.objects.filter(status="Discarded").count()
+    
+    asset_request_count = AssetRequest.objects.count()
+    asset_request_pending_count = AssetRequest.objects.filter(status="Pending").count()
+    asset_request_approved_count = AssetRequest.objects.filter(status="Approved").count()
+    asset_request_declined_count = AssetRequest.objects.filter(status="Declined").count()
+    
+    context = {
+        'asset_count': asset_count,
+        'asset_checkedin_count': asset_checkedin_count,
+        'asset_checkedout_count': asset_checkedout_count,
+        'asset_under_service_count': asset_under_service_count,
+        'asset_discarded_count': asset_discarded_count,
+        'asset_request_count': asset_request_count,
+        'asset_request_pending_count': asset_request_pending_count,
+        'asset_request_approved_count': asset_request_approved_count,
+        'asset_request_declined_count': asset_request_declined_count,
+    }
     if active_user_id:
-        return render(request, 'accounts/admin_home.html')
+        return render(request, 'accounts/admin_home.html', {'context': context})
     else:
         return redirect('employee_login')
 

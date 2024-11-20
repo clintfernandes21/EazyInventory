@@ -20,40 +20,26 @@
 <body>
     <div class="row">
     	<div class="col-md-12">
-    		<h4>Welcome, {{ user.first_name }}</h4>
-    		<hr>
+    		<!--<h4>Welcome, {{ user.first_name }}</h4>-->
+    		<!--<hr>-->
+    		<h5>Assets</h5>
     		<div class="row text-center" style="margin-left: 0px; margin-right: 0px;">
-	            <div class="col" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	            <div class="col-md-2" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
 	                <div class="card-content">
 	                    <div class="card-body">
 	                        <div class="media d-flex">
 	                            <div class="align-self-center">
-	                                <i class="fa-solid fa-wallet" style="font-size: 3rem; color: #163254;"></i>
+	                                <i class="fa-solid fa-server" style="font-size: 3rem; color: #163254;"></i>
 	                            </div>
 	                            <div class="media-body text-right">
-	                                <span>Text</span>
-	                                <h3></h3>
+	                                <span>Total</span>
+	                                <h3>{{ context.asset_count }}</h3>
 	                            </div>
 	                        </div>
 	                   </div>
 	                </div>
 	            </div>
-	            <div class="col" style="background-color: #ffffff; margin: 0 5px 0 10px; padding: 20px; border-radius: 10px;"> 
-	                <div class="card-content">
-	                    <div class="card-body">
-	                        <div class="media d-flex">
-	                            <div class="align-self-center">
-	                                <i class="fa-solid fa-right-left" style="font-size: 3rem; color: #163254;"></i>
-	                            </div>
-	                            <div class="media-body text-right">
-	                                <span>Text</span>
-	                                <h3></h3>
-	                            </div>
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	            <div class="col-md-3" style="background-color: #ffffff; margin: 0 10px 0 5px; padding: 20px; border-radius: 10px;"> 
+	            <div class="col-md-2" style="background-color: #ffffff; margin: 0 5px 0 10px; padding: 20px; border-radius: 10px;"> 
 	                <div class="card-content">
 	                    <div class="card-body">
 	                        <div class="media d-flex">
@@ -61,14 +47,14 @@
 	                                <i class="fa-solid fa-arrow-down" style="font-size: 3rem; color: #163254;"></i>
 	                            </div>
 	                            <div class="media-body text-right">
-	                                <span>Text</span>
-	                                <h3></h3>
+	                                <span>Checked In</span>
+	                                <h3>{{ context.asset_checkedin_count }}</h3>
 	                            </div>
 	                        </div>
 	                    </div>
 	                </div>
 	            </div>
-	            <div class="col-md-3" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	            <div class="col-md-2" style="background-color: #ffffff; margin: 0 5px 0 5px; padding: 20px; border-radius: 10px;"> 
 	                <div class="card-content">
 	                    <div class="card-body">
 	                        <div class="media d-flex">
@@ -76,8 +62,101 @@
 	                                <i class="fa-solid fa-arrow-up" style="font-size: 3rem; color: #163254;"></i>
 	                            </div>
 	                            <div class="media-body text-right">
-	                                <span>Text</span>
-	                                <h3>{{active_user_id}}</h3>
+	                                <span>Checked Out</span>
+	                                <h3>{{ context.asset_checkedout_count }}</h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-2" style="background-color: #ffffff; margin: 0 10px 0 5px; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-screwdriver" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Maintenance</span>
+	                                <h3>{{ context.asset_under_service_count }}</h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-2" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-trash" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Discarded</span>
+	                                <h3>{{ context.asset_discarded_count }}</h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+    		<h5 style="margin-top: 40px;">Requests</h5>
+    		<div class="row text-center" style="margin-left: 0px; margin-right: 0px;">
+	            <div class="col-md-2" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-hand-point-up" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Total</span>
+	                                <h3>{{ context.asset_request_count }}</h3>
+	                            </div>
+	                        </div>
+	                   </div>
+	                </div>
+	            </div>
+	            <div class="col-md-2" style="background-color: #ffffff; margin: 0 5px 0 10px; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-hourglass-half" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Pending</span>
+	                                <h3>{{ context.asset_request_pending_count }}</h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-2" style="background-color: #ffffff; margin: 0 10px 0 5px; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-check" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Approved</span>
+	                                <h3>{{ context.asset_request_approved_count }}</h3>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	            <div class="col-md-2" style="background-color: #ffffff; padding: 20px; border-radius: 10px;"> 
+	                <div class="card-content">
+	                    <div class="card-body">
+	                        <div class="media d-flex">
+	                            <div class="align-self-center">
+	                                <i class="fa-solid fa-xmark" style="font-size: 3rem; color: #163254;"></i>
+	                            </div>
+	                            <div class="media-body text-right">
+	                                <span>Declined</span>
+	                                <h3>{{ context.asset_request_declined_count }}</h3>
 	                            </div>
 	                        </div>
 	                    </div>
