@@ -1,0 +1,65 @@
+<!--assets/templates/assets/admin_view_request_asset.html-->
+{% extends 'layout.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    
+    <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+    <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+
+</head>
+
+<div class="row">
+	<div class="col-md-12">
+	    <h4>Asset Requests Submitted</h4>
+	    <hr>
+	    <div class="card card-body">
+	        <table class="table table-striped">
+	            <thead class="thead-dark">
+	                <tr>
+	                    <th>Asset</th>
+	                    <th>Requested By</th>
+	                    <th>Issue Date</th>
+	                    <th>Return Date</th>
+	                    <th>Reason</th>
+	                    <th>Requested On</th>
+	                    <th>Status</th>
+	                </tr>
+	            </thead>
+	            {% if context.all_requests %}
+    				{% for asset in context.all_requests %}
+    					<tr>
+    					    <td>{{ asset.asset }}</td>
+    					    <td>{{ asset.employee.first_name }}</td>
+    						<td>{{ asset.issue_date}}</td>
+    						<td>{{ asset.return_date }}</td>
+    						<td>{{ asset.reason }}</td>
+    						<td>{{ asset.request_date }}</td>
+    						<!--<td>{{ asset.status }}</td>-->
+    						{% if asset.status == "Approved" %}
+    							<td><button class="btn btn-primary btn-sm btn-success" style="width: 7rem;">Approved</button></td>
+    						{% elif asset.status == "Pending" %}
+    							<td><button class="btn btn-primary btn-sm btn-warning" style="width: 7rem;">Pending</button></td>
+    						{% elif asset.status == "Declined" %}
+    							<td><button class="btn btn-primary btn-sm btn-danger" style="width: 7rem;">Declined</button></td>
+    						{% endif %}
+    					</tr>
+    				{% endfor %}
+    			{% else %}
+    			    <tr>
+    			        <td colspan="7" class="text-center text-muted">There are no asset requests submitted yet</td>
+    			    </tr>
+    			{% endif %}
+    	    </table>
+    	</div>
+	</div>
+</div>
+
+{% endblock %}

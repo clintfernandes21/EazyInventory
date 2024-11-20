@@ -1,17 +1,17 @@
-<!--assets/templates/assets/checkin_asset.html-->
+<!--assets/templates/assets/admin_add_asset.html-->
 {% extends 'layout.html' %}
 
 {% block content %}
 
 <div class="row">
     <div class="col-md-12">
-        <h4>Checkin an Asset From Employee</h4>
+        <h4>Add a New Asset</h4>
         <hr>
         <div class="card card-body" style="padding: 3rem 30rem 3rem 30rem;">
             <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
-            <button class="btn btn-primary col" type="submit">Checkin Asset</button>
+            <button class="btn btn-primary col" type="submit">Add Asset</button>
             {% if messages %}
                 {% for message in messages %}
                     <p class="text-center" style="color: green; margin: 1rem 0;">{{ message }}</p>

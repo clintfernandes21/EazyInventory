@@ -62,3 +62,20 @@ class Component(models.Model):
     
     def __str__(self):
         return str(self.name)
+
+class AssetRequest(models.Model):
+    asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employees, on_delete=models.CASCADE)
+    issue_date = models.DateField()
+    return_date = models.DateField()
+    reason = models.CharField(max_length=200)
+    request_date = models.DateTimeField(auto_now_add=True, null=True)
+    ASSET_REQUEST_STATUS_CHOICES = [
+        ('Pending', 'Pending'),
+        ('Approved', 'Approved'),
+        ('Declined', 'Declined')
+    ]
+    status = models.CharField(max_length=20, choices=ASSET_REQUEST_STATUS_CHOICES, null=True, blank=True, default="Pending")
+    
+    def __str__(self):
+        return str(self.asset)

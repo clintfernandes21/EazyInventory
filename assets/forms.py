@@ -1,6 +1,6 @@
 # assets/forms.py
 from django import forms
-from .models import Asset, Component
+from .models import Asset, Component, AssetRequest
 from accounts.models import Employees
 
 class AddAssetForm(forms.ModelForm):
@@ -39,3 +39,13 @@ class AssetCheckInForm(forms.ModelForm):
     class Meta:
         model = Asset
         fields = ['asset']
+
+class AssetRequestForm(forms.ModelForm):
+    asset = forms.ModelChoiceField(queryset=Asset.objects.exclude(status__in=["CheckedOut", "UnderService", "Discarded"]), label="Select an Asset", widget=forms.Select(attrs={'class': 'form-control'}))
+    issue_date = forms.DateField(required=True, label="Issue Date", widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    return_date = forms.DateField(required=True, label="Return Date", widget=forms.DateInput(attrs={'class': 'form-control', 'type': 'date'}))
+    reason = forms.CharField(max_length=30, required=True, label="Reason for request", widget=forms.Textarea(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = AssetRequest
+        fields = ['asset', 'issue_date', 'return_date', 'reason']

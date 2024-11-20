@@ -1,4 +1,4 @@
-<!--assets/templates/assets/view_asset.html-->
+<!--assets/templates/assets/admin_view_asset.html-->
 {% extends 'layout.html' %}
 
 {% load static %}
@@ -41,7 +41,11 @@
     						<td>{{ asset.tag }}</td>
     						<td>{{ asset.brand }}</td>
     						<td>{{ asset.purchase_date }}</td>
-    						<td><i class="fa-solid fa-user"></i> {{ asset.assigned_to }}</td>
+    						{% if asset.assigned_to.first_name != None %}
+    							<td><i class="fa-solid fa-user"></i>  {{ asset.assigned_to.first_name }}</td>
+    						{% else %}
+	    						<td></td>
+    						{% endif %}
     						{% if asset.status == "CheckedIn" %}
     							<td><button class="btn btn-primary btn-sm btn-success" style="width: 7rem;">Checked In</button></td>
     						{% elif asset.status == "CheckedOut" %}
@@ -55,7 +59,7 @@
     				{% endfor %}
     			{% else %}
     			    <tr>
-    			        <td colspan="7" class="text-center text-muted">You do not have any transactions to display</td>
+    			        <td colspan="7" class="text-center text-muted">No assets have been added yet</td>
     			    </tr>
     			{% endif %}
     	    </table>

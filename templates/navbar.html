@@ -9,7 +9,7 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 100px;">
                 <ul class="navbar-nav">
                     <li class="nav-item active" style="margin-right: 10px;">
-                        <a class="nav-link" href="">Asset Requests</a>
+                        <a class="nav-link" href="{% url 'admin_view_request_asset' %}">Asset Requests</a>
                     </li>
                     <li class="nav-item active" style="margin-right: 10px;">
                         <a class="nav-link" href="">Asset Service Requests</a>
@@ -17,10 +17,10 @@
                     <li class="nav-item dropdown" style="padding: 0 10px;">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">Asset</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'view_asset' %}">View</a>
-                            <a class="dropdown-item" href="{% url 'add_asset' %}">Add</a>
-                            <a class="dropdown-item" href="{% url 'checkout_asset' %}">Check Out</a>
-                            <a class="dropdown-item" href="{% url 'checkin_asset' %}">Check In</a>
+                            <a class="dropdown-item" href="{% url 'admin_view_asset' %}">View</a>
+                            <a class="dropdown-item" href="{% url 'admin_add_asset' %}">Add</a>
+                            <a class="dropdown-item" href="{% url 'admin_checkout_asset' %}">Check Out</a>
+                            <a class="dropdown-item" href="{% url 'admin_checkin_asset' %}">Check In</a>
                         </div>
                     </li>
                     <li class="nav-item dropdown" style="padding: 0 10px;">
@@ -52,15 +52,19 @@
             <div class="collapse navbar-collapse" id="navbarNav" style="margin-left: 100px;">
                 <ul class="navbar-nav">
                     <li class="nav-item active" style="margin-right: 10px;">
-                        <a class="nav-link" href="">Request Asset</a>
-                    </li>
-                    <li class="nav-item active" style="margin-right: 10px;">
                         <a class="nav-link" href="">Request Asset Service</a>
                     </li>
                     <li class="nav-item dropdown" style="padding: 0 10px;">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">Asset</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{% url 'employee_view_asset' %}">View</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown" style="padding: 0 10px;">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: white;">Requests</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{% url 'employee_request_asset' %}">Submit New Request</a>
+                            <a class="dropdown-item" href="{% url 'employee_view_request_asset' %}">View All Requests</a>
                         </div>
                     </li>
                 </ul>

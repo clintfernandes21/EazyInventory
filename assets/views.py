@@ -1,10 +1,10 @@
 # assets/views.py
 from django.shortcuts import render, redirect
-from .models import Asset, Component
-from .forms import AddAssetForm, AddComponentForm, AssetCheckOutForm, AssetCheckInForm
+from .models import Asset, Component, AssetRequest
+from .forms import AddAssetForm, AddComponentForm, AssetCheckOutForm, AssetCheckInForm, AssetRequestForm
 from django.contrib import messages
 
-def add_asset(request):
+def admin_add_asset(request):
     active_user_id = request.session.get('user_id')
     if active_user_id:
         if request.method == 'POST':
@@ -12,21 +12,21 @@ def add_asset(request):
             if form.is_valid():
                 form.save()
                 messages.success(request, f"New asset has been added.")
-                return redirect('add_asset')
+                return redirect('admin_add_asset')
         else:
             form = AddAssetForm()
-        return render(request, 'assets/add_asset.html', {'form': form})
+        return render(request, 'assets/admin_add_asset.html', {'form': form})
     else:
         return redirect('employee_login')
 
-def view_asset(request):
+def admin_view_asset(request):
     active_user_id = request.session.get('user_id')
     all_assets = Asset.objects.all()
     context = {
         'all_assets': all_assets
     }
     if active_user_id:
-        return render(request, 'assets/view_asset.html', {'context': context})
+        return render(request, 'assets/admin_view_asset.html', {'context': context})
     else:
         return redirect('employee_login')
 
@@ -56,7 +56,7 @@ def view_component(request):
     else:
         return redirect('employee_login')
 
-def checkout_asset(request):
+def admin_checkout_asset(request):
     active_user_id = request.session.get('user_id')
     if active_user_id:
         if request.method == 'POST':
@@ -71,14 +71,14 @@ def checkout_asset(request):
                 asset.save(update_fields=['assigned_to'])
                 
                 messages.success(request, f"Item checked out successfully.")
-                return redirect('checkout_asset')
+                return redirect('admin_checkout_asset')
         else:
             form = AssetCheckOutForm()
-        return render(request, 'assets/checkout_asset.html', {'form': form})
+        return render(request, 'assets/admin_checkout_asset.html', {'form': form})
     else:
         return redirect('employee_login')
 
-def checkin_asset(request):
+def admin_checkin_asset(request):
     active_user_id = request.session.get('user_id')
     if active_user_id:
         if request.method == 'POST':
@@ -92,10 +92,10 @@ def checkin_asset(request):
                 asset.save(update_fields=['assigned_to'])
                 
                 messages.success(request, f"Item checked in successfully.")
-                return redirect('checkin_asset')
+                return redirect('admin_checkin_asset')
         else:
             form = AssetCheckInForm()
-        return render(request, 'assets/checkin_asset.html', {'form': form})
+        return render(request, 'assets/admin_checkin_asset.html', {'form': form})
     else:
         return redirect('employee_login')
 
@@ -107,5 +107,44 @@ def employee_view_asset(request):
     }
     if active_user_id:
         return render(request, 'assets/employee_view_asset.html', {'context': context})
+    else:
+        return redirect('employee_login')
+
+def employee_request_asset(request):
+    active_user_id = request.session.get('user_id')
+    if active_user_id:
+        if request.method == 'POST':
+            form = AssetRequestForm(request.POST)
+            if form.is_valid():
+                asset_request = form.save(commit=False)
+                asset_request.employee_id = active_user_id
+                asset_request.save()
+                messages.success(request, f"Asset request has been submitted.")
+                return redirect('employee_request_asset')
+        else:
+            form = AssetRequestForm()
+        return render(request, 'assets/employee_request_asset.html', {'form': form})
+    else:
+        return redirect('employee_login')
+
+def employee_view_request_asset(request):
+    active_user_id = request.session.get('user_id')
+    all_requests = AssetRequest.objects.filter(employee_id=active_user_id)
+    context = {
+        'all_requests': all_requests
+    }
+    if active_user_id:
+        return render(request, 'assets/employee_view_request_asset.html', {'context': context})
+    else:
+        return redirect('employee_login')
+
+def admin_view_request_asset(request):
+    active_user_id = request.session.get('user_id')
+    all_requests = AssetRequest.objects.all()
+    context = {
+        'all_requests': all_requests
+    }
+    if active_user_id:
+        return render(request, 'assets/admin_view_request_asset.html', {'context': context})
     else:
         return redirect('employee_login')

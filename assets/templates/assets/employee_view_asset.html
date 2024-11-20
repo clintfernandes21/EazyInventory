@@ -18,25 +18,25 @@
 
 <div class="row">
 	<div class="col-md-12">
-	    <h4>All Assets Assigned to You</h4>
+	    <h4>Assets Assigned to You</h4>
 	    <hr>
 	    <div class="card card-body">
 	        <table class="table table-striped">
 	            <thead class="thead-dark">
 	                <tr>
 	                    <th>Name</th>
-	                    <th>Category</th>
 	                    <th>Tag</th>
 	                    <th>Brand</th>
+	                    <th>Category</th>
 	                </tr>
 	            </thead>
 	            {% if context.all_assets %}
     				{% for asset in context.all_assets %}
     					<tr>
     					    <td>{{ asset.name }}</td>
-    						<td>{{ asset.category}}</td>
     						<td>{{ asset.tag }}</td>
     						<td>{{ asset.brand }}</td>
+    						<td>{{ asset.category}}</td>
     					</tr>
     				{% endfor %}
     			{% else %}
