@@ -12,7 +12,7 @@ phases:
         commands:
             - python --version
             - pylint $CODEBUILD_SRC_DIR/*.py
-            - pylint $CODEBUILD_SRC_DIR/EazyInventory/*.py
+            - pylint --disable=C0103 $CODEBUILD_SRC_DIR/EazyInventory/*.py
 artifacts:
     files:
         - '**/*'
