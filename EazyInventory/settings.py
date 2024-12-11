@@ -29,7 +29,7 @@ AUTH_USER_MODEL = 'accounts.Employees'
 
 CSRF_TRUSTED_ORIGINS=['https://5670ab92f1be4e6b96ecad530af9b775.vfs.cloud9.eu-west-1.amazonaws.com', 'http://x23348089-cdos-project-eazyinventory-env.eba-8akmupdv.eu-west-1.elasticbeanstalk.com']
 
-ALLOWED_HOSTS = ['5670ab92f1be4e6b96ecad530af9b775.vfs.cloud9.eu-west-1.amazonaws.com', 'x23348089-cdos-project-eazyinventory-env.eba-8akmupdv.eu-west-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['172.31.9.158', '5670ab92f1be4e6b96ecad530af9b775.vfs.cloud9.eu-west-1.amazonaws.com', 'x23348089-cdos-project-eazyinventory-env.eba-8akmupdv.eu-west-1.elasticbeanstalk.com']
 
 
 # Application definition
