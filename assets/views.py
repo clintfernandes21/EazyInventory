@@ -1,7 +1,7 @@
 # assets/views.py
 from django.shortcuts import render, redirect
 from .models import Asset, Component, AssetRequest
-from .forms import AddAssetForm, AddComponentForm, AssetCheckOutForm, AssetCheckInForm, AssetRequestForm
+from .forms import AddAssetForm, AddComponentForm, AssetCheckOutForm, AssetCheckInForm, AssetRequestForm, UpdateRequestStatus
 from django.contrib import messages
 
 def admin_add_asset(request):
@@ -146,5 +146,26 @@ def admin_view_request_asset(request):
     }
     if active_user_id:
         return render(request, 'assets/admin_view_request_asset.html', {'context': context})
+    else:
+        return redirect('employee_login')
+
+def admin_update_request_status(request):
+    active_user_id = request.session.get('user_id')
+    if active_user_id:
+        if request.method == 'POST':
+            form = UpdateRequestStatus(request.POST)
+            if form.is_valid():
+                asset = form.cleaned_data['asset']
+                updated_status = form.cleaned_data['updated_status']
+                asset = Asset.objects.get(name=asset)
+                asset = asset.tag
+                asset = AssetRequest.objects.get(asset=asset)
+                asset.status = updated_status
+                asset.save(update_fields=['status'])
+                messages.success(request, f"Asset Request change to {updated_status}")
+                return redirect('admin_update_request_status')
+        else:
+            form = UpdateRequestStatus()
+        return render(request, 'assets/admin_update_request_status.html', {'form': form})
     else:
         return redirect('employee_login')

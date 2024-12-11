@@ -49,3 +49,11 @@ class AssetRequestForm(forms.ModelForm):
     class Meta:
         model = AssetRequest
         fields = ['asset', 'issue_date', 'return_date', 'reason']
+
+class UpdateRequestStatus(forms.ModelForm):
+    asset = forms.ModelChoiceField(queryset=AssetRequest.objects.all(), label="Select an Asset Request", widget=forms.Select(attrs={'class': 'form-control'}))
+    updated_status = forms.ChoiceField(choices=AssetRequest.ASSET_REQUEST_STATUS_CHOICES, label="Update Status To", widget=forms.Select(attrs={'class': 'form-control'}))
+    
+    class Meta:
+        model = Asset
+        fields = ['asset', 'updated_status']

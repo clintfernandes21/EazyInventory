@@ -1,0 +1,24 @@
+<!--assets/templates/assets/admin_update_request_status.html-->
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-12">
+        <h4>Update Asset Request Status</h4>
+        <hr>
+        <div class="card card-body" style="padding: 3rem 30rem 3rem 30rem;">
+            <form method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+            <button class="btn btn-primary col" type="submit">Update Request</button>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-center" style="color: green; margin: 1rem 0;">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
