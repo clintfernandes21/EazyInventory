@@ -1,0 +1,39 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.x
+    commands:
+      - echo Installing dependencies...
+      - pip install -r requirements.txt
+      - curl -sS https://repo1.maven.org/maven2/org/sonarsource/scanner/cli/sonar-scanner-cli/6.2.1.4610/sonar-scanner-cli-6.2.1.4610-linux-x64.zip -o sonar-scanner.zip
+      - unzip sonar-scanner.zip
+      - export PATH=$PATH:$(pwd)/sonar-scanner-6.2.1.4610-linux-x64/bin
+
+  pre_build:
+    commands:
+      - echo Pre-building phase...
+      - export SONARQUBE_TOKEN=36c49c48254e3e84c4c834f76bd3213473eb1343
+      - export SONARQUBE_URL=https://sonarcloud.io
+      - export SONARQUBE_PROJECT_KEY=clintfernandes21_EazyInventory
+      - export SONARQUBE_ORG=clintfernandes21
+
+  build:
+    commands:
+      - echo Building the application...
+      - sonar-scanner \
+          -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY \
+          -Dsonar.organization=$SONARQUBE_ORG \
+          -Dsonar.sources=./ \
+          -Dsonar.host.url=$SONARQUBE_URL \
+          -Dsonar.login=$SONARQUBE_TOKEN
+
+  post_build:
+    commands:
+      - echo Post-building phase...
+      - echo Build complete.
+
+artifacts:
+  files:
+    - '**/*'
