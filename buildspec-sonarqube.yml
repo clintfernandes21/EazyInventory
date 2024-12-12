@@ -22,12 +22,7 @@ phases:
   build:
     commands:
       - echo Building the application...
-      - sonar-scanner \
-          -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY \
-          -Dsonar.organization=$SONARQUBE_ORG \
-          -Dsonar.sources=./ \
-          -Dsonar.host.url=$SONARQUBE_URL \
-          -Dsonar.login=$SONARQUBE_TOKEN
+      - sonar-scanner -Dsonar.projectKey=$SONARQUBE_PROJECT_KEY -Dsonar.organization=$SONARQUBE_ORG -Dsonar.sources=./ -Dsonar.host.url=$SONARQUBE_URL -Dsonar.login=$SONARQUBE_TOKEN
 
   post_build:
     commands:
