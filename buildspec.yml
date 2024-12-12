@@ -5,14 +5,25 @@ phases:
         runtime-versions:
             python: 3.9.16
         commands:
+            # Installing the dependencies and Pylint
             - pip install --upgrade pip
-            # Install dependencies needed for running the static analysis
             - pip install -r requirements.txt pylint
+            
+            # Installing SonarQube Scanner CLI
+            - curl -sS https://repo1.maven.org/maven2/org/sonarsource/scanner/cli/sonar-scanner-cli/6.2.1.4610/sonar-scanner-cli-6.2.1.4610-linux-x64.zip -o sonar-scanner.zip
+            - unzip sonar-scanner.zip
+            - export PATH=$PATH:$(pwd)/sonar-scanner-6.2.1.4610-linux-x64/bin
     pre_build:
         commands:
             - python --version
+            
+            # Running static code analysis with Pylint
             - pylint $CODEBUILD_SRC_DIR/*.py
             - pylint --disable=C0103 $CODEBUILD_SRC_DIR/EazyInventory/*.py
+            
+            # Running security vulnerability analysis with SonarQube Cloud
+            - sonar-scanner -Dsonar.projectKey=clintfernandes21_EazyInventory -Dsonar.organization=clintfernandes21 -Dsonar.sources=./ -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=36c49c48254e3e84c4c834f76bd3213473eb1343
+            
 artifacts:
     files:
         - '**/*'
