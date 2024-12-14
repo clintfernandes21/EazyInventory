@@ -1,5 +1,5 @@
-# assets/urls.py
-from django.urls import path, include
+"""assets/urls.py"""
+from django.urls import path
 from .views import admin_add_asset, admin_view_asset, admin_checkout_asset, admin_checkin_asset, add_component, view_component, admin_view_request_asset, admin_update_request_status
 from .views import employee_view_asset, employee_request_asset, employee_view_request_asset
 

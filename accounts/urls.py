@@ -1,4 +1,4 @@
-# accounts/urls.py
+"""accounts/urls.py"""
 from django.urls import path, include
 from .views import employee_register, employee_login, employee_home, employee_logout, admin_home, admin_logout
 

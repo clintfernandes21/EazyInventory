@@ -1,11 +1,13 @@
+"""accounts/views.py"""
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
-from .forms import EmployeeRegisterForm, EmployeeLoginForm
+from django.contrib import messages
+from accounts.forms import EmployeeRegisterForm, EmployeeLoginForm
 from accounts.models import Employees
 from assets.models import Asset, AssetRequest
-from django.contrib import messages
 
 def employee_register(request):
+    """Employee Register"""
     if request.method == 'POST':
         form = EmployeeRegisterForm(request.POST)
         if form.is_valid():
@@ -16,6 +18,7 @@ def employee_register(request):
     return render(request, 'accounts/employee_register.html', {'form': form})
 
 def employee_login(request):
+    """Employee Login"""
     if request.method == 'POST':
         form = EmployeeLoginForm(request.POST)
         username = request.POST.get('username')
@@ -32,6 +35,7 @@ def employee_login(request):
     return render(request, 'accounts/employee_login.html', {'form': form})
     
 def employee_home(request):
+    """Employee Home"""
     active_user_id = request.session.get('user_id')
     if Employees.objects.get(id=active_user_id).username == "admin":
         return redirect(admin_home)
@@ -42,10 +46,12 @@ def employee_home(request):
             return redirect('employee_login')
 
 def employee_logout(request):
+    """Employee Logout"""
     logout(request)
     return redirect('landing_page')
 
 def admin_home(request):
+    """Admin Home"""
     active_user_id = request.session.get('user_id')
     
     asset_count = Asset.objects.count()
@@ -76,5 +82,6 @@ def admin_home(request):
         return redirect('employee_login')
 
 def admin_logout(request):
+    """Admin Logout"""
     logout(request)
     return redirect('landing_page')

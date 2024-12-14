@@ -1,8 +1,9 @@
-# assets/models.py
+"""assets/models.py"""
 from django.db import models
 from accounts.models import Employees
 
 class Asset(models.Model):
+    """Class representing Assets"""
     name = models.CharField(max_length=30)
     ASSET_CATEGORY_CHOICES = [
         ('Laptop', 'Laptop'),
@@ -37,6 +38,7 @@ class Asset(models.Model):
         return str(self.name)
 
 class Component(models.Model):
+    """Class representing Components"""
     name = models.CharField(max_length=30)
     COMPONENT_CATEGORY_CHOICES = [
         ('Hard Disk', 'Hard Disk'),
@@ -64,6 +66,7 @@ class Component(models.Model):
         return str(self.name)
 
 class AssetRequest(models.Model):
+    """Class representing Asset Requests"""
     asset = models.ForeignKey(Asset, on_delete=models.CASCADE)
     employee = models.ForeignKey(Employees, on_delete=models.CASCADE)
     issue_date = models.DateField()

@@ -1,6 +1,6 @@
-# accounts/models.py
-from django.db import models
+"""accounts/models.py"""
 from django.contrib.auth.models import AbstractUser
 
 class Employees(AbstractUser):
-    pass
+    """Class representing Employees"""
+    # pass
